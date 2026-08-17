@@ -402,6 +402,9 @@ public class GameManager : MonoBehaviour
     socketController.AccumulateResult(betCounter);
     yield return new WaitUntil(() => socketController.isResultdone);
 
+    if (socketController.ResultData?.player != null)
+      currentBalance = socketController.ResultData.player.balance;
+
     HandleAutoUntilFeatureCutoff();
 
     slotManager.PopulateSlotMatrix(socketController.ResultData.matrix, socketController.ResultData.payload.goldenPositions);
